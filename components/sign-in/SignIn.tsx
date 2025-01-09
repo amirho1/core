@@ -15,9 +15,11 @@ import Stack from "@mui/material/Stack";
 import MuiCard from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
 import ForgotPassword from "./ForgotPassword";
-import { GoogleIcon, FacebookIcon } from "./CustomIcons";
+import { GoogleIcon } from "./CustomIcons";
 import ColorModeSelect from "../shared-theme/ColorModeSelect";
 import { FormEvent, useState } from "react";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import { signIn } from "@/auth";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -69,15 +71,15 @@ export default function SignIn() {
     setOpen(false);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     if (emailError || passwordError) {
       event.preventDefault();
       return;
     }
     const data = new FormData(event.currentTarget);
-  };
+  }
 
-  const validateInputs = () => {
+  function validateInputs() {
     const email = document.getElementById("email") as HTMLInputElement;
     const password = document.getElementById("password") as HTMLInputElement;
 
@@ -102,7 +104,10 @@ export default function SignIn() {
     }
 
     return isValid;
-  };
+  }
+
+  function handleGitHubButtonClick() {
+  }
 
   return (
     <>
@@ -120,6 +125,10 @@ export default function SignIn() {
           <Box
             component="form"
             onSubmit={handleSubmit}
+            action={async () => {
+              "use server"
+              await signIn("google")
+            }}
             noValidate
             sx={{
               display: "flex",
@@ -178,7 +187,7 @@ export default function SignIn() {
               label={t("Remember me")}
             />
             <ForgotPassword open={open} handleClose={handleClose} />
-            <Button type="submit" fullWidth variant="contained" onClick={validateInputs}>
+            <Button type="submit" fullWidth variant="contained">
               {t("Sign In")}
             </Button>
             <Typography sx={{ textAlign: "center" }}>
@@ -195,7 +204,8 @@ export default function SignIn() {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => alert(t("Sign In with Google"))}
+              type="submit"
+              // onClick={() => alert(t("Sign In with Google"))}
               startIcon={<GoogleIcon />}
             >
               {t("Sign In with Google")}
@@ -203,10 +213,10 @@ export default function SignIn() {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => alert(t("Sign In with Facebook"))}
-              startIcon={<FacebookIcon />}
+              onClick={handleGitHubButtonClick}
+              startIcon={<GitHubIcon />}
             >
-              {t("Sign In with Facebook")}
+              {t("Sign In with Github")}
             </Button>
           </Box>
         </Card>

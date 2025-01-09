@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "pages": {
+    "/": {
+      "page": "/index"
+    },
+    "/about-us": {
+      "page": "/about-us"
+    },
+    "/dashboard": {
+      "page": "/dashboard"
+    },
+    "/en/dashboard": {
+      "page": "/en/dashboard"
+    }
+  },
+  "dynamicRoutes": {
+    "/blog/[id]": {
+      "page": "/blog/[id]"
+    }
+  }
+}

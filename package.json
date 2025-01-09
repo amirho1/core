@@ -6,21 +6,16 @@
   "packageManager": "pnpm@8.6.0",
   "scripts": {
     "build": "NODE_ENV=production next build",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv env.d.ts",
-    "deploy": "pnpm pages:build && wrangler pages deploy",
     "dev": "next dev",
     "eslint": "pnpm node_modules/eslint/bin/eslint.js --fix",
     "locales": "node tools/updateLocale.js",
     "lint": "next lint",
     "pages:build": "pnpm next-on-pages",
     "prettier": "pnpm ./node_modules/prettier/bin/prettier.cjs   -w .",
-    "preview": "pnpm pages:build && wrangler pages dev",
-    "start": "next start",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate:local": "wrangler d1 migrations apply darbare-db --local",
-    "db:migrate:prod": "wrangler d1 migrations apply darbare-db --remote"
+    "start": "next start"
   },
   "dependencies": {
+    "@auth/typeorm-adapter": "^2.7.4",
     "@emotion/cache": "^11.13.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
@@ -38,21 +33,21 @@
     "@react-spring/web": "^9.7.5",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
-    "drizzle-kit": "^0.29.1",
-    "drizzle-orm": "^0.37.0",
     "i18next": "^23.16.5",
     "i18next-resources-to-backend": "^1.2.1",
     "next": "15.0.3",
     "next-auth": "^4.24.10",
     "next-i18n-router": "^5.5.1",
+    "oidc-token-hash": "^5.0.3",
+    "pg": "^8.13.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^15.1.1",
-    "stylis-plugin-rtl": "^2.1.1"
+    "reflect-metadata": "^0.2.2",
+    "stylis-plugin-rtl": "^2.1.1",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.5",
-    "@cloudflare/workers-types": "^4.20241106.0",
     "@eslint/js": "^9.14.0",
     "@types/node": "^22.9.0",
     "@types/react": "^18.3.12",
@@ -65,7 +60,6 @@
     "prettier": "^3.3.3",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.13.0",
-    "vercel": "^37.14.0",
-    "wrangler": "^3.85.0"
+    "vercel": "^37.14.0"
   }
 }

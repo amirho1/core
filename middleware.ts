@@ -1,12 +1,9 @@
-import type { NextRequest } from "next/server";
-import { i18nRouter } from "next-i18n-router";
-import i18nConfig from "./i18nConfig";
+import chain from "./middlewares/chain";
+import internationalization from "./middlewares/internationalization";
 
-export function middleware(request: NextRequest) {
-  return i18nRouter(request, i18nConfig);
-}
+export default chain([internationalization]);
 
 // only applies this middleware to files in the app directory
 export const config = {
-  matcher: "/((?!api|static|.*\\..*|_next).*)",
+  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 };

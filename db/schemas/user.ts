@@ -1,13 +1,42 @@
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
+  Unique,
+  Index,
+} from "typeorm";
 
-export default sqliteTable("users", {
-  id: integer({ mode: "number" }).primaryKey({ autoIncrement: true }),
-  first_name: text("first_name", { length: 255 }).notNull(),
-  last_name: text("last_name", { length: 255 }).notNull(),
-  phone_number: text("phone_number", { length: 15 }).unique(),
-  email: text("email", { length: 255 }).unique().notNull(),
-  password: text({ length: 255 }).notNull(),
-  profile_picture: text(),
-  created_at: integer({ mode: "timestamp_ms" }),
-  updated_at: integer({ mode: "timestamp_ms" }),
-});
+@Entity("users")
+export default class User {
+  @PrimaryGeneratedColumn()
+  id!: number;
+
+  @Column({ length: 255 })
+  firstName!: string;
+
+  @Column({ length: 255 })
+  lastName!: string;
+
+  @Column({ length: 15, nullable: true, unique: true, default: null })
+  phoneNumber: string | null = null;
+
+  @Column({ length: 255, unique: true })
+  email!: string;
+
+  @Column({ length: 255 })
+  password: string | null = null;
+
+  @Column({ type: "text", nullable: true })
+  profilePicture!: string;
+
+  @CreateDateColumn({ type: "timestamp" })
+  createdAt!: Date;
+
+  @UpdateDateColumn({ type: "timestamp" })
+  updatedAt!: Date;
+}

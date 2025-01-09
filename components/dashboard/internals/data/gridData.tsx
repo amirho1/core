@@ -69,7 +69,7 @@ export function renderAvatar(params: GridCellParams<{ name: string; color: strin
         fontSize: "0.85rem",
       }}
     >
-      {params.value.name.toUpperCase().substring(0, 1)}
+      {/* {params.value.name.toUpperCase().substring(0, 1)} */}
     </Avatar>
   );
 }
